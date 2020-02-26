@@ -1,0 +1,38 @@
+﻿// https://gitlab.com/swisschain/matching-engine/-/blob/master/src/main/proto/IncomingApi.proto#L15
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.lykke.matching.engine.incoming";
+option java_outer_classname = "IncomingApi";
+option objc_class_prefix = "API";
+
+package com.lykke.matching.engine.incoming;
+
+import "Protos/IncomingMessages.proto";
+import "Protos/OutgoingMessages.proto";
+import "Protos/BalancesMessages.proto";
+import "google/protobuf/empty.proto";
+
+service CashService {
+	rpc CashInOut(com.lykke.matching.engine.messages.incoming.CashInOutOperation) returns (com.lykke.matching.engine.messages.incoming.Response) {}
+	rpc CashTransfer(com.lykke.matching.engine.messages.incoming.CashTransferOperation) returns (com.lykke.matching.engine.messages.incoming.Response) {}
+	rpc ReservedCashInOut(com.lykke.matching.engine.messages.incoming.ReservedCashInOutOperation) returns (com.lykke.matching.engine.messages.incoming.Response) {}
+}
+
+service TradingService {
+	rpc MarketOrder(com.lykke.matching.engine.messages.incoming.MarketOrder) returns (com.lykke.matching.engine.messages.incoming.MarketOrderResponse) {}
+	rpc LimitOrder(com.lykke.matching.engine.messages.incoming.LimitOrder) returns (com.lykke.matching.engine.messages.incoming.Response) {}
+	rpc CancelLimitOrder(com.lykke.matching.engine.messages.incoming.LimitOrderCancel) returns (com.lykke.matching.engine.messages.incoming.Response) {}
+	rpc MassCancelLimitOrder(com.lykke.matching.engine.messages.incoming.LimitOrderMassCancel) returns (com.lykke.matching.engine.messages.incoming.Response) {}
+
+	rpc MultiLimitOrder(com.lykke.matching.engine.messages.incoming.MultiLimitOrder) returns (com.lykke.matching.engine.messages.incoming.MultiLimitOrderResponse) {}
+}
+
+service OrderBooksService {
+	rpc OrderBookSnapshots(google.protobuf.Empty) returns (stream com.lykke.matching.engine.messages.outgoing.OrderBookSnapshot) {}
+}
+
+service BalancesService {
+	rpc getBalance(com.lykke.matching.engine.incoming.BalanceRequest) returns (com.lykke.matching.engine.incoming.BalanceResponse) {}
+}

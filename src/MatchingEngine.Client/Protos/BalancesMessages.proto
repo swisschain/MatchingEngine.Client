@@ -1,0 +1,25 @@
+﻿syntax = "proto3";
+
+option java_package = "com.lykke.matching.engine.incoming";
+option java_outer_classname = "BalancesMessages";
+
+package com.lykke.matching.engine.incoming;
+
+import "google/protobuf/wrappers.proto";
+
+message BalanceRequest {
+	string clientId = 1;
+	google.protobuf.StringValue assetId = 2;
+}
+
+message BalanceResponse {
+	string clientId = 1;
+	repeated Balance balances = 2;
+	int64 timestamp = 3;
+}
+
+message Balance {
+	string assetId = 1;
+	string balance = 2;
+	string reservedBalance = 3;
+}
