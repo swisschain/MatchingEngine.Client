@@ -5,7 +5,7 @@ option java_outer_classname = "BalancesMessages";
 
 package com.lykke.matching.engine.incoming;
 
-import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 message BalancesGetAllRequest {
 	string walletId = 1;
@@ -19,13 +19,13 @@ message BalancesGetByAssetIdRequest {
 message BalancesGetAllResponse {
 	string walletId = 1;
 	repeated Balance balances = 2;
-	int64 timestamp = 3;
+	google.protobuf.Timestamp timestamp = 3;
 }
 
 message BalancesGetByAssetIdResponse {
 	string walletId = 1;
 	Balance balance = 2;
-	int64 timestamp = 3;
+	google.protobuf.Timestamp timestamp = 3;
 }
 
 message Balance {

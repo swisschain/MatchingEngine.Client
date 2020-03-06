@@ -54,6 +54,7 @@ namespace ConsoleTest
                     WalletId = "test-2"
                 });
                 CheckResponse(balance);
+                
                 foreach (var asset in balance.Balances)
                 {
                     Console.WriteLine($"{balance.WalletId}: {asset.AssetId} = {asset.Amount}");
