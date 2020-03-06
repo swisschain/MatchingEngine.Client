@@ -34,5 +34,7 @@ service OrderBooksService {
 }
 
 service BalancesService {
-	rpc getBalance(com.lykke.matching.engine.incoming.BalanceRequest) returns (com.lykke.matching.engine.incoming.BalanceResponse) {}
+	rpc GetAll(com.lykke.matching.engine.incoming.BalancesGetAllRequest) returns (com.lykke.matching.engine.incoming.BalancesGetAllResponse) {}
+
+	rpc GetByAssetId(com.lykke.matching.engine.incoming.BalancesGetByAssetIdRequest) returns (com.lykke.matching.engine.incoming.BalancesGetByAssetIdResponse) {}
 }

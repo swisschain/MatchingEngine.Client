@@ -1,9 +1,5 @@
-﻿ 
-using System.Text.Json.Serialization;
-using Com.Lykke.Matching.Engine.Incoming;
+﻿using Com.Lykke.Matching.Engine.Incoming;
 using Com.Lykke.Matching.Engine.Messages.Incoming;
-using Google.Protobuf.WellKnownTypes;
-using Grpc.Net.Client;
 
 namespace ConsoleTest
 {
@@ -53,14 +49,14 @@ namespace ConsoleTest
                 });
                 CheckResponse(response);
 
-                BalanceResponse balance = client.BalancesService.getBalance(new Com.Lykke.Matching.Engine.Incoming.BalanceRequest()
+                var balance = client.BalancesService.GetAll(new BalancesGetAllRequest
                 {
-                    ClientId = "test-2"
+                    WalletId = "test-2"
                 });
                 CheckResponse(balance);
                 foreach (var asset in balance.Balances)
                 {
-                    Console.WriteLine($"{balance.ClientId}: {asset.AssetId} = {asset.Balance_}");
+                    Console.WriteLine($"{balance.WalletId}: {asset.AssetId} = {asset.Amount}");
                 }
 
                 response = client.CashService.CashInOut(new CashInOutOperation()
@@ -83,14 +79,14 @@ namespace ConsoleTest
                 });
                 CheckResponse(response);
 
-                balance = client.BalancesService.getBalance(new Com.Lykke.Matching.Engine.Incoming.BalanceRequest()
+                balance = client.BalancesService.GetAll(new BalancesGetAllRequest
                 {
-                    ClientId = "test-3"
+                    WalletId = "test-3"
                 });
                 CheckResponse(balance);
                 foreach (var asset in balance.Balances)
                 {
-                    Console.WriteLine($"{balance.ClientId}: {asset.AssetId} = {asset.Balance_}");
+                    Console.WriteLine($"{balance.WalletId}: {asset.AssetId} = {asset.Amount}");
                 }
 
 
@@ -114,7 +110,7 @@ namespace ConsoleTest
             }
         }
 
-        private static void CheckResponse(BalanceResponse response)
+        private static void CheckResponse(BalancesGetAllResponse response)
         {
         }
 

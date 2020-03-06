@@ -7,19 +7,29 @@ package com.lykke.matching.engine.incoming;
 
 import "google/protobuf/wrappers.proto";
 
-message BalanceRequest {
-	string clientId = 1;
-	google.protobuf.StringValue assetId = 2;
+message BalancesGetAllRequest {
+	string walletId = 1;
 }
 
-message BalanceResponse {
-	string clientId = 1;
+message BalancesGetByAssetIdRequest {
+	string walletId = 1;
+	string assetId = 2;
+}
+
+message BalancesGetAllResponse {
+	string walletId = 1;
 	repeated Balance balances = 2;
+	int64 timestamp = 3;
+}
+
+message BalancesGetByAssetIdResponse {
+	string walletId = 1;
+	Balance balance = 2;
 	int64 timestamp = 3;
 }
 
 message Balance {
 	string assetId = 1;
-	string balance = 2;
-	string reservedBalance = 3;
+	string amount = 2;
+	string reserved = 3;
 }
