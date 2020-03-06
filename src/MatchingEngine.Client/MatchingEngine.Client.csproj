@@ -1,20 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>1.0.0</Version>
+    <Authors>Swisschain</Authors>
+    <Company>Swisschain</Company>
+    <Product>Swisschain.MatchingEngine.Client</Product>
+    <PackageId>Swisschain.MatchingEngine.Client</PackageId>
+    <Description>Client for Swisschain.MatchingEngine API</Description>
+    <PackageLicenseUrl>https://github.com/SC-Poc/MatchingEngine.Client/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/SC-Poc/MatchingEngine.Client</PackageProjectUrl>
+    <PackageIconUrl>https://avatars3.githubusercontent.com/u/14153330?v=3&amp;s=200</PackageIconUrl>
+    <RepositoryUrl>https://github.com/SC-Poc/MatchingEngine.Client.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Swisschain</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Protos\BalancesMessages.proto" />
-    <None Remove="Protos\IncomingApi.proto" />
-    <None Remove="Protos\IncomingMessages.proto" />
-    <None Remove="Protos\OutgoingMessages.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Protobuf Include="Protos\BalancesMessages.proto" GrpcServices="Client" />
-  </ItemGroup>
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.11.3" />
     <PackageReference Include="Grpc.Net.Client" Version="2.27.0" />
@@ -23,12 +28,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Protobuf Include="Protos\BalancesMessages.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\IncomingMessages.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\OutgoingMessages.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\IncomingApi.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\BalancesMessages.proto" GrpcServices="Client" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Remove="Protos\BalancesMessages.proto" />
+    <None Remove="Protos\IncomingApi.proto" />
+    <None Remove="Protos\IncomingMessages.proto" />
+    <None Remove="Protos\OutgoingMessages.proto" />
+  </ItemGroup>
 </Project>

@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchingEngine.Client", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Test", "test\Console.Test\Console.Test.csproj", "{F12CB379-FF46-4CEB-B296-35EEE05B94C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0EB7879E-CC38-40A6-9BBC-F405EC3048EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{EDA80C3D-E1E0-47A3-9327-872D403B3690}"
+ProjectSection(SolutionItems) = preProject
+	.github\workflows\nuget-client.yml = .github\workflows\nuget-client.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92FE2D42-A23D-4CE3-B43F-E93D9657C4E1}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDA80C3D-E1E0-47A3-9327-872D403B3690} = {0EB7879E-CC38-40A6-9BBC-F405EC3048EF}
 	EndGlobalSection
 EndGlobal
