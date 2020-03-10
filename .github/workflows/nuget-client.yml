@@ -2,7 +2,7 @@ name: NuGet Client
 
 on:
   push:
-    tags: "client-*"
+    tags: "*"
 
 jobs:
   build:
@@ -18,6 +18,6 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
     - name: Package
-      run: dotnet pack --configuration Release src/MatchingEngine.Client /p:Version=${GITHUB_REF#refs/tags/client-}
+      run: dotnet pack --configuration Release src/MatchingEngine.Client /p:Version=${GITHUB_REF#refs/tags/}
     - name: Publish
       run: dotnet nuget push src/MatchingEngine.Client/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
