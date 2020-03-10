@@ -1,15 +1,14 @@
-﻿// https://gitlab.com/swisschain/matching-engine/-/blob/master/src/main/proto/OutgoingMessages.proto
+﻿syntax = "proto3";
 
-syntax = "proto3";
+option java_package = "com.lykke.matching.engine.messages.outgoing";
+option java_outer_classname = "OutgoingMessages";
+option csharp_namespace = "MatchingEngine.Client.Contracts.Outgoing";
 
-package com.lykke.matching.engine.messages.outgoing;
+package com.swisschain.grpc.messages.outgoing;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
 import "google/protobuf/wrappers.proto";
-
-option java_package = "com.lykke.matching.engine.messages.outgoing";
-option java_outer_classname = "OutgoingMessages";
 
 service GrpOutgoingEventsService {
     rpc publishEvents(MessageWrapper) returns (PublishRequestResult){};
@@ -246,11 +245,13 @@ message OrderBookSnapshotEvent {
 message OrderBookSnapshot {
     string asset = 1;
     bool isBuy = 2;
-    int64 timestamp = 3;
+    google.protobuf.Timestamp timestamp = 3;
 
     message OrderBookLevel {
         string price = 1;
         string volume = 2;
+        string walletId = 3;
+        string orderId = 4;
     }
 
     repeated OrderBookLevel levels = 4;

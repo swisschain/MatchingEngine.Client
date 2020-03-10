@@ -9,5 +9,10 @@ namespace MatchingEngine.Client
         /// The balance service endpoint address.
         /// </summary>
         public string BalancesServiceAddress { get; set; }
+
+        /// <summary>
+        /// The balance service endpoint address.
+        /// </summary>
+        public string OrderBooksServiceAddress { get; set; }
     }
 }

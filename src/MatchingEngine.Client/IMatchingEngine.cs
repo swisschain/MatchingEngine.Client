@@ -11,5 +11,10 @@ namespace MatchingEngine.Client
         /// Balances API.
         /// </summary>
         IBalancesApi Balances { get; }
+        
+        /// <summary>
+        /// Order books API.
+        /// </summary>
+        IOrderBooksApi OrderBooks { get; }
     }
 }

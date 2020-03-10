@@ -1,13 +1,13 @@
-﻿// https://gitlab.com/swisschain/matching-engine/-/blob/master/src/main/proto/IncomingMessages.proto
-
-syntax = "proto3";
-
-package com.lykke.matching.engine.messages.incoming;
+﻿syntax = "proto3";
 
 option java_package = "com.lykke.matching.engine.messages.incoming";
 option java_outer_classname = "IncomingMessages";
+option csharp_namespace = "MatchingEngine.Client.Contracts.Incoming";
+
+package com.swisschain.grpc.messages.incoming;
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 message Response {
     google.protobuf.StringValue id = 1;
@@ -46,7 +46,7 @@ message MultiLimitOrderResponse {
 message CashInOutOperation {
     string id = 1;
     string clientId = 2;
-    int64 timestamp = 3;
+    google.protobuf.Timestamp timestamp = 3;
     string assetId = 4;
     double volume = 5;
     repeated Fee fees = 6;
@@ -57,7 +57,7 @@ message CashTransferOperation {
     string id = 1;
     string fromClientId = 2;
     string toClientId = 3;
-    int64 timestamp = 4;
+    google.protobuf.Timestamp timestamp = 4;
     string assetId = 5;
     double volume = 6;
     google.protobuf.DoubleValue overdraftLimit = 7;
@@ -67,7 +67,7 @@ message CashTransferOperation {
 
 message LimitOrder {
     string uid = 1;
-    int64 timestamp = 2;
+    google.protobuf.Timestamp timestamp = 2;
     string clientId = 3;
     string assetPairId = 4;
     double volume = 5;
@@ -81,7 +81,7 @@ message LimitOrder {
     google.protobuf.DoubleValue upperPrice = 13;
     google.protobuf.StringValue messageId = 14;
     google.protobuf.Int32Value timeInForce = 15;
-    google.protobuf.Int64Value expiryTime = 16;
+    google.protobuf.Timestamp expiryTime = 16;
 }
 
 enum LimitOrderType {
@@ -98,7 +98,7 @@ enum OrderTimeInForce {
 
 message MarketOrder {
     string uid = 1;
-    int64 timestamp = 2;
+    google.protobuf.Timestamp timestamp = 2;
     string clientId = 3;
     string assetPairId = 4;
     double volume = 5;
@@ -116,7 +116,7 @@ message LimitOrderCancel {
 
 message MultiLimitOrderCancel {
     string uid = 1;
-    int64 timestamp = 2;
+    google.protobuf.Timestamp timestamp = 2;
     string clientId = 3;
     string assetPairId = 4;
     bool isBuy = 5;
@@ -133,7 +133,7 @@ message LimitOrderMassCancel {
 
 message MultiLimitOrder {
     string uid = 1;
-    int64 timestamp = 2;
+    google.protobuf.Timestamp timestamp = 2;
     string clientId = 3;
     string assetPairId = 4;
 
@@ -144,7 +144,7 @@ message MultiLimitOrder {
         repeated LimitOrderFee fees = 4;
         google.protobuf.StringValue oldUid = 5;
         google.protobuf.Int32Value timeInForce = 6;
-        google.protobuf.Int64Value expiryTime = 7;
+        google.protobuf.Timestamp expiryTime = 7;
         google.protobuf.Int32Value type = 8;
         google.protobuf.DoubleValue lowerLimitPrice = 9;
         google.protobuf.DoubleValue lowerPrice = 10;
@@ -168,7 +168,7 @@ enum CancelMode {
 message ReservedCashInOutOperation {
     string id = 1;
     string clientId = 2;
-    int64 timestamp = 3;
+    google.protobuf.Timestamp timestamp = 3;
     string assetId = 4;
     double reservedVolume = 5;
     google.protobuf.StringValue messageId = 6;

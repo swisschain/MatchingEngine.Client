@@ -14,11 +14,18 @@ namespace MatchingEngine.Client
         public MatchingEngineClient(MatchingEngineClientSettings settings)
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            
-            Balances = new BalancesApi(settings.BalancesServiceAddress);
+
+            if (!string.IsNullOrEmpty(settings.BalancesServiceAddress))
+                Balances = new BalancesApi(settings.BalancesServiceAddress);
+
+            if (!string.IsNullOrEmpty(settings.OrderBooksServiceAddress))
+                OrderBooks = new OrderBooksApi(settings.OrderBooksServiceAddress);
         }
 
         /// <inheritdoc />
         public IBalancesApi Balances { get; }
+
+        /// <inheritdoc />
+        public IOrderBooksApi OrderBooks { get; }
     }
 }

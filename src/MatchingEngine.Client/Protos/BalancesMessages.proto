@@ -2,8 +2,9 @@
 
 option java_package = "com.lykke.matching.engine.incoming";
 option java_outer_classname = "BalancesMessages";
+option csharp_namespace = "MatchingEngine.Client.Contracts.Balances";
 
-package com.lykke.matching.engine.incoming;
+package com.swisschain.grpc.balances;
 
 import "google/protobuf/timestamp.proto";
 

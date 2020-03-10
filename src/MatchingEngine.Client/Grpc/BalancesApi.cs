@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Com.Lykke.Matching.Engine.Incoming;
 using Grpc.Net.Client;
 using MatchingEngine.Client.Api;
+using MatchingEngine.Client.Contracts.Api;
 using MatchingEngine.Client.Models.Balances;
+using MatchingEngine.Client.Contracts.Balances;
 
 namespace MatchingEngine.Client.Grpc
 {
@@ -14,8 +15,8 @@ namespace MatchingEngine.Client.Grpc
 
         public BalancesApi(string address)
         {
-            var balancesServiceChannel = GrpcChannel.ForAddress(address);
-            _client = new BalancesService.BalancesServiceClient(balancesServiceChannel);
+            var channel = GrpcChannel.ForAddress(address);
+            _client = new BalancesService.BalancesServiceClient(channel);
         }
 
         public async Task<IReadOnlyList<BalanceModel>> GetAllAsync(string walletId)
@@ -25,13 +26,7 @@ namespace MatchingEngine.Client.Grpc
             var timestamp = response.Timestamp.ToDateTime();
 
             return response.Balances
-                .Select(o => new BalanceModel
-                {
-                    AssetId = o.AssetId,
-                    Amount = decimal.Parse(o.Amount),
-                    Reserved = decimal.Parse(o.Reserved),
-                    Timestamp = timestamp
-                })
+                .Select(o => new BalanceModel(o, timestamp))
                 .ToList();
         }
 
@@ -43,13 +38,9 @@ namespace MatchingEngine.Client.Grpc
             if (response.Balance == null)
                 return null;
 
-            return new BalanceModel
-            {
-                AssetId = response.Balance.AssetId,
-                Amount = decimal.Parse(response.Balance.Amount),
-                Reserved = decimal.Parse(response.Balance.Reserved),
-                Timestamp = response.Timestamp.ToDateTime()
-            };
+            var timestamp = response.Timestamp.ToDateTime();
+            
+            return new BalanceModel(response.Balance, timestamp);
         }
     }
 }
