@@ -90,7 +90,7 @@ message FeeTransfer {
     string sourceWalletId = 2;
     string targetWalletId = 3;
     string assetId = 4;
-    string FeeCoef = 5;
+    string feeCoef = 5;
     int32 index = 6;
 }
 
@@ -157,6 +157,7 @@ message ExecutionEvent {
             int32 role = 14;
 
             repeated FeeTransfer fees = 15;
+            TradeStatus status = 16;
         }
 
         enum OrderType {
@@ -226,6 +227,20 @@ message ExecutionEvent {
     repeated Order orders = 3;
 }
 
+enum TradeStatus {
+    UNKNOWN_STATUS = 0;
+    PENDING = 1;
+    CONFIRMED = 2;
+    REJECTED = 3;
+}
+
+message TradeResponse {
+    string traderId = 1;
+    TradeStatus status = 2;
+    string statusReason = 3;
+    google.protobuf.Timestamp timestamp = 4;
+}
+
 message ReservedBalanceUpdateEvent {
     message ReservedBalanceUpdate {
         string walletId = 1;
@@ -256,3 +271,4 @@ message OrderBookSnapshot {
 
     repeated OrderBookLevel levels = 4;
 }
+
