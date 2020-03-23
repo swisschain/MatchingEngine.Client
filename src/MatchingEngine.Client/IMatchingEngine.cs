@@ -21,5 +21,10 @@ namespace MatchingEngine.Client
         /// Cash operations API.
         /// </summary>
         ICashOperationsApi CashOperations { get; }
+        
+        /// <summary>
+        /// Trading API.
+        /// </summary>
+        ITradingApi Trading { get; }
     }
 }

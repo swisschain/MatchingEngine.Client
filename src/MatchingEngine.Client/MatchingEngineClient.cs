@@ -23,6 +23,9 @@ namespace MatchingEngine.Client
 
             if (!string.IsNullOrEmpty(settings.CashOperationsServiceAddress))
                 CashOperations = new CashOperationsApi(settings.CashOperationsServiceAddress);
+
+            if (!string.IsNullOrEmpty(settings.TradingServiceAddress))
+                Trading = new TradingApi(settings.TradingServiceAddress);
         }
 
         /// <inheritdoc />
@@ -33,5 +36,8 @@ namespace MatchingEngine.Client
 
         /// <inheritdoc />
         public ICashOperationsApi CashOperations { get; }
+
+        /// <inheritdoc />
+        public ITradingApi Trading { get; }
     }
 }

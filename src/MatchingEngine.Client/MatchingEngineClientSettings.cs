@@ -14,10 +14,15 @@ namespace MatchingEngine.Client
         /// The order books service endpoint address.
         /// </summary>
         public string OrderBooksServiceAddress { get; set; }
-        
+
         /// <summary>
         /// The cash operations service endpoint address.
         /// </summary>
         public string CashOperationsServiceAddress { get; set; }
+
+        /// <summary>
+        /// The trading service endpoint address.
+        /// </summary>
+        public string TradingServiceAddress { get; set; }
     }
 }
