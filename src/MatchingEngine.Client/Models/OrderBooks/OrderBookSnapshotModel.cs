@@ -23,7 +23,7 @@ namespace MatchingEngine.Client.Models.OrderBooks
             IsBuy = orderBookSnapshot.IsBuy;
             Timestamp = orderBookSnapshot.Timestamp.ToDateTime();
             Levels = orderBookSnapshot.Levels
-                .Select(level => new OrderBookLevelModel())
+                .Select(level => new OrderBookLevelModel(level))
                 .ToList();
         }
 

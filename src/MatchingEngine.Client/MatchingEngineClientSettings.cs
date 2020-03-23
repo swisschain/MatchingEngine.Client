@@ -11,8 +11,13 @@ namespace MatchingEngine.Client
         public string BalancesServiceAddress { get; set; }
 
         /// <summary>
-        /// The balance service endpoint address.
+        /// The order books service endpoint address.
         /// </summary>
         public string OrderBooksServiceAddress { get; set; }
+        
+        /// <summary>
+        /// The cash operations service endpoint address.
+        /// </summary>
+        public string CashOperationsServiceAddress { get; set; }
     }
 }

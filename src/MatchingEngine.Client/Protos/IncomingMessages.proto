@@ -1,10 +1,11 @@
 ﻿syntax = "proto3";
 
+package com.swisschain.grpc.messages.incoming;
+
 option java_package = "com.lykke.matching.engine.messages.incoming";
 option java_outer_classname = "IncomingMessages";
-option csharp_namespace = "MatchingEngine.Client.Contracts.Incoming";
 
-package com.swisschain.grpc.messages.incoming;
+option csharp_namespace = "MatchingEngine.Client.Contracts.Incoming";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
@@ -21,7 +22,7 @@ message MarketOrderResponse {
     google.protobuf.StringValue id = 1;
     int32 status = 2;
     google.protobuf.StringValue statusReason = 3;
-    google.protobuf.DoubleValue price = 4;
+    google.protobuf.StringValue price = 4;
     google.protobuf.StringValue messageId = 5;
 }
 
@@ -36,8 +37,8 @@ message MultiLimitOrderResponse {
         google.protobuf.StringValue matchingEngineId = 2;
         int32 status = 3;
         google.protobuf.StringValue statusReason = 4;
-        double volume = 5;
-        double price = 6;
+        string volume = 5;
+        string price = 6;
     }
     repeated OrderStatus statuses = 5;
     google.protobuf.StringValue messageId = 6;
@@ -45,22 +46,22 @@ message MultiLimitOrderResponse {
 
 message CashInOutOperation {
     string id = 1;
-    string clientId = 2;
+    string walletId = 2;
     google.protobuf.Timestamp timestamp = 3;
     string assetId = 4;
-    double volume = 5;
+    string volume = 5;
     repeated Fee fees = 6;
     google.protobuf.StringValue messageId = 7;
 }
 
 message CashTransferOperation {
     string id = 1;
-    string fromClientId = 2;
-    string toClientId = 3;
+    string fromWalletId = 2;
+    string toWalletId = 3;
     google.protobuf.Timestamp timestamp = 4;
     string assetId = 5;
-    double volume = 6;
-    google.protobuf.DoubleValue overdraftLimit = 7;
+    string volume = 6;
+    google.protobuf.StringValue overdraftLimit = 7;
     repeated Fee fees = 8;
     google.protobuf.StringValue messageId = 9;
 }
@@ -68,17 +69,17 @@ message CashTransferOperation {
 message LimitOrder {
     string uid = 1;
     google.protobuf.Timestamp timestamp = 2;
-    string clientId = 3;
+    string walletId = 3;
     string assetPairId = 4;
-    double volume = 5;
-    google.protobuf.DoubleValue price = 6;
+    string volume = 5;
+    google.protobuf.StringValue price = 6;
     google.protobuf.BoolValue cancelAllPreviousLimitOrders = 7;
     repeated LimitOrderFee fees = 8;
     google.protobuf.Int32Value type = 9;
-    google.protobuf.DoubleValue lowerLimitPrice = 10;
-    google.protobuf.DoubleValue lowerPrice = 11;
-    google.protobuf.DoubleValue upperLimitPrice = 12;
-    google.protobuf.DoubleValue upperPrice = 13;
+    google.protobuf.StringValue lowerLimitPrice = 10;
+    google.protobuf.StringValue lowerPrice = 11;
+    google.protobuf.StringValue upperLimitPrice = 12;
+    google.protobuf.StringValue upperPrice = 13;
     google.protobuf.StringValue messageId = 14;
     google.protobuf.Int32Value timeInForce = 15;
     google.protobuf.Timestamp expiryTime = 16;
@@ -99,11 +100,11 @@ enum OrderTimeInForce {
 message MarketOrder {
     string uid = 1;
     google.protobuf.Timestamp timestamp = 2;
-    string clientId = 3;
+    string walletId = 3;
     string assetPairId = 4;
-    double volume = 5;
+    string volume = 5;
     bool straight = 6;
-    google.protobuf.DoubleValue reservedLimitVolume = 7;
+    google.protobuf.StringValue reservedLimitVolume = 7;
     repeated Fee fees = 8;
     google.protobuf.StringValue messageId = 9;
 }
@@ -117,7 +118,7 @@ message LimitOrderCancel {
 message MultiLimitOrderCancel {
     string uid = 1;
     google.protobuf.Timestamp timestamp = 2;
-    string clientId = 3;
+    string walletId = 3;
     string assetPairId = 4;
     bool isBuy = 5;
     google.protobuf.StringValue messageId = 6;
@@ -125,7 +126,7 @@ message MultiLimitOrderCancel {
 
 message LimitOrderMassCancel {
     string uid = 1;
-    google.protobuf.StringValue clientId = 2;
+    google.protobuf.StringValue walletId = 2;
     google.protobuf.StringValue assetPairId = 3;
     google.protobuf.BoolValue isBuy = 4;
     google.protobuf.StringValue messageId = 5;
@@ -134,22 +135,22 @@ message LimitOrderMassCancel {
 message MultiLimitOrder {
     string uid = 1;
     google.protobuf.Timestamp timestamp = 2;
-    string clientId = 3;
+    string walletId = 3;
     string assetPairId = 4;
 
     message Order {
         string uid = 1;
-        double volume = 2;
-        google.protobuf.DoubleValue price = 3;
+        string volume = 2;
+        google.protobuf.StringValue price = 3;
         repeated LimitOrderFee fees = 4;
         google.protobuf.StringValue oldUid = 5;
         google.protobuf.Int32Value timeInForce = 6;
         google.protobuf.Timestamp expiryTime = 7;
         google.protobuf.Int32Value type = 8;
-        google.protobuf.DoubleValue lowerLimitPrice = 9;
-        google.protobuf.DoubleValue lowerPrice = 10;
-        google.protobuf.DoubleValue upperLimitPrice = 11;
-        google.protobuf.DoubleValue upperPrice = 12;
+        google.protobuf.StringValue lowerLimitPrice = 9;
+        google.protobuf.StringValue lowerPrice = 10;
+        google.protobuf.StringValue upperLimitPrice = 11;
+        google.protobuf.StringValue upperPrice = 12;
     }
 
     repeated Order orders = 5;
@@ -167,10 +168,10 @@ enum CancelMode {
 
 message ReservedCashInOutOperation {
     string id = 1;
-    string clientId = 2;
+    string walletId = 2;
     google.protobuf.Timestamp timestamp = 3;
     string assetId = 4;
-    double reservedVolume = 5;
+    string reservedVolume = 5;
     google.protobuf.StringValue messageId = 6;
 }
 
@@ -187,21 +188,21 @@ enum FeeSizeType {
 
 message Fee {
     int32 type = 1;
-    google.protobuf.DoubleValue size = 2;
-    google.protobuf.StringValue sourceClientId = 3;
-    google.protobuf.StringValue targetClientId = 4;
+    google.protobuf.StringValue size = 2;
+    google.protobuf.StringValue sourceWalletId = 3;
+    google.protobuf.StringValue targetWalletId = 4;
     google.protobuf.Int32Value sizeType = 5;
     repeated string assetId = 6;
 }
 
 message LimitOrderFee {
     int32 type = 1;
-    google.protobuf.DoubleValue makerSize = 2;
-    google.protobuf.DoubleValue takerSize = 3;
-    google.protobuf.StringValue sourceClientId = 4;
-    google.protobuf.StringValue targetClientId = 5;
+    google.protobuf.StringValue makerSize = 2;
+    google.protobuf.StringValue takerSize = 3;
+    google.protobuf.StringValue sourceWalletId = 4;
+    google.protobuf.StringValue targetWalletId = 5;
     google.protobuf.Int32Value makerSizeType = 6;
     google.protobuf.Int32Value takerSizeType = 7;
     repeated string assetId = 8;
-    google.protobuf.DoubleValue makerFeeModificator = 9;
+    google.protobuf.StringValue makerFeeModificator = 9;
 }

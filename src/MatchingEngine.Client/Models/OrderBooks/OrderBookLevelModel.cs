@@ -19,7 +19,7 @@ namespace MatchingEngine.Client.Models.OrderBooks
         {
             Price = decimal.Parse(orderBookLevel.Price);
             Volume = decimal.Parse(orderBookLevel.Volume);
-            WalletId = Guid.Parse(orderBookLevel.WalletId);
+            WalletId = orderBookLevel.WalletId;
             OrderId = Guid.Parse(orderBookLevel.OrderId);
         }
 
@@ -36,7 +36,7 @@ namespace MatchingEngine.Client.Models.OrderBooks
         /// <summary>
         /// The wallet identifier.
         /// </summary>
-        public Guid WalletId { get; set; }
+        public string WalletId { get; set; }
 
         /// <summary>
         /// The limit order identifier.

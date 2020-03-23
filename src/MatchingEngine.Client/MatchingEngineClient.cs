@@ -20,6 +20,9 @@ namespace MatchingEngine.Client
 
             if (!string.IsNullOrEmpty(settings.OrderBooksServiceAddress))
                 OrderBooks = new OrderBooksApi(settings.OrderBooksServiceAddress);
+
+            if (!string.IsNullOrEmpty(settings.CashOperationsServiceAddress))
+                CashOperations = new CashOperationsApi(settings.CashOperationsServiceAddress);
         }
 
         /// <inheritdoc />
@@ -27,5 +30,8 @@ namespace MatchingEngine.Client
 
         /// <inheritdoc />
         public IOrderBooksApi OrderBooks { get; }
+
+        /// <inheritdoc />
+        public ICashOperationsApi CashOperations { get; }
     }
 }
