@@ -1,4 +1,6 @@
+using System.Threading;
 using System.Threading.Tasks;
+using MatchingEngine.Client.Contracts.Incoming;
 
 namespace MatchingEngine.Client.Api
 {
@@ -10,17 +12,6 @@ namespace MatchingEngine.Client.Api
         /// <summary>
         /// Cash-in an amount.
         /// </summary>
-        /// <param name="walletId">The wallet identifier.</param>
-        /// <param name="assetId">The asset identifier.</param>
-        /// <param name="amount">The amount.</param>
-        Task CashInAsync(string walletId, string assetId, decimal amount);
-
-        /// <summary>
-        /// Cash-out an amount.
-        /// </summary>
-        /// <param name="walletId">The wallet identifier.</param>
-        /// <param name="assetId">The asset identifier.</param>
-        /// <param name="amount">The amount.</param>
-        Task CashOutAsync(string walletId, string assetId, decimal amount);
+        Task<Response> CashInOutAsync(CashInOutOperation request, CancellationToken cancellationToken = default);
     }
 }

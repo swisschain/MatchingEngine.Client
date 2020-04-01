@@ -1,7 +1,5 @@
-using System;
-using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
 using MatchingEngine.Client.Api;
 using MatchingEngine.Client.Contracts.Api;
@@ -19,30 +17,9 @@ namespace MatchingEngine.Client.Grpc
             _client = new CashService.CashServiceClient(channel);
         }
 
-        public async Task CashInAsync(string walletId, string assetId, decimal amount)
+        public async Task<Response> CashInOutAsync(CashInOutOperation request, CancellationToken cancellationToken = default)
         {
-            await _client.CashInOutAsync(new CashInOutOperation
-            {
-                Id = Guid.NewGuid().ToString(),
-                WalletId = walletId,
-                AssetId = assetId,
-                Volume = amount.ToString(CultureInfo.InvariantCulture),
-                MessageId = Guid.NewGuid().ToString(),
-                Timestamp = Timestamp.FromDateTime(DateTime.UtcNow)
-            });
-        }
-
-        public async Task CashOutAsync(string walletId, string assetId, decimal amount)
-        {
-            await _client.CashInOutAsync(new CashInOutOperation
-            {
-                Id = Guid.NewGuid().ToString(),
-                WalletId = walletId,
-                AssetId = assetId,
-                Volume = (-amount).ToString(CultureInfo.InvariantCulture),
-                MessageId = Guid.NewGuid().ToString(),
-                Timestamp = Timestamp.FromDateTime(DateTime.UtcNow)
-            });
+            return await _client.CashInOutAsync(request, cancellationToken: cancellationToken);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using MatchingEngine.Client.Models.OrderBooks;
+using MatchingEngine.Client.Contracts.Outgoing;
 
 namespace MatchingEngine.Client.Api
 {
@@ -13,6 +14,6 @@ namespace MatchingEngine.Client.Api
         /// Returns all order books.
         /// </summary>
         /// <returns>A collection of order books.</returns>
-        Task<IReadOnlyList<OrderBookSnapshotModel>> GetAllAsync();
+        Task<IReadOnlyList<OrderBookSnapshot>> GetAllAsync(CancellationToken cancellationToken = default);
     }
 }

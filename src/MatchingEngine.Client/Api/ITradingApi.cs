@@ -1,6 +1,6 @@
-using System;
+using System.Threading;
 using System.Threading.Tasks;
-using MatchingEngine.Client.Models.Trading;
+using MatchingEngine.Client.Contracts.Incoming;
 
 namespace MatchingEngine.Client.Api
 {
@@ -12,14 +12,12 @@ namespace MatchingEngine.Client.Api
         /// <summary>
         /// Creates new limit order.
         /// </summary>
-        /// <param name="request">The limit order creation information.</param>
         /// <returns>The limit order creation result.</returns>
-        Task<LimitOrderResponseModel> CreateLimitOrderAsync(LimitOrderRequestModel request);
+        Task<Response> CreateLimitOrderAsync(LimitOrder request, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancels the limit order.
         /// </summary>
-        /// <param name="limitOrderId">The limit order identifier.</param>
-        Task CancelLimitOrderAsync(Guid limitOrderId);
+        Task<Response> CancelLimitOrderAsync(LimitOrderCancel request, CancellationToken cancellationToken = default);
     }
 }

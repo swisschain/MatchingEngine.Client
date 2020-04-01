@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Grpc.Net.Client;
 using MatchingEngine.Client.Api;
 using MatchingEngine.Client.Contracts.Api;
-using MatchingEngine.Client.Models.OrderBooks;
+using MatchingEngine.Client.Contracts.Outgoing;
 
 namespace MatchingEngine.Client.Grpc
 {
@@ -19,17 +20,17 @@ namespace MatchingEngine.Client.Grpc
             _client = new OrderBooksService.OrderBooksServiceClient(channel);
         }
 
-        public async Task<IReadOnlyList<OrderBookSnapshotModel>> GetAllAsync()
+        public async Task<IReadOnlyList<OrderBookSnapshot>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            var orderBooks = new List<OrderBookSnapshotModel>();
+            var orderBooks = new List<OrderBookSnapshot>();
             
             try
             {
-                using (var streamingCall = _client.OrderBookSnapshots(new Empty()))
+                using (var streamingCall = _client.OrderBookSnapshots(new Empty(), cancellationToken: cancellationToken))
                 {
-                    await foreach (var orderBookSnapshot in streamingCall.ResponseStream.ReadAllAsync())
+                    await foreach (var orderBookSnapshot in streamingCall.ResponseStream.ReadAllAsync(cancellationToken))
                     {
-                        orderBooks.Add(new OrderBookSnapshotModel(orderBookSnapshot));
+                        orderBooks.Add(orderBookSnapshot);
                     }
                 }
             }

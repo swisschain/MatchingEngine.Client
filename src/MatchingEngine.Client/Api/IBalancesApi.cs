@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using MatchingEngine.Client.Models.Balances;
+using MatchingEngine.Client.Contracts.Balances;
 
 namespace MatchingEngine.Client.Api
 {
@@ -12,16 +12,13 @@ namespace MatchingEngine.Client.Api
         /// <summary>
         /// Returns all assets balances.
         /// </summary>
-        /// <param name="walletId">The wallet identifier.</param>
         /// <returns>A collection of assets balances.</returns>
-        Task<IReadOnlyList<BalanceModel>> GetAllAsync(string walletId);
+        Task<BalancesGetAllResponse> GetAllAsync(BalancesGetAllRequest request, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a balance by asset identifier.
         /// </summary>
-        /// <param name="walletId">The wallet identifier.</param>
-        /// <param name="assetId">The asset identifier.</param>
         /// <returns>Asset balance.</returns>
-        Task<BalanceModel> GetByAssetIdAsync(string walletId, string assetId);
+        Task<BalancesGetByAssetIdResponse> GetByAssetIdAsync(BalancesGetByAssetIdRequest request, CancellationToken cancellationToken = default);
     }
 }
