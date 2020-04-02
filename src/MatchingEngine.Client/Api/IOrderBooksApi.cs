@@ -13,7 +13,6 @@ namespace MatchingEngine.Client.Api
         /// <summary>
         /// Returns all order books.
         /// </summary>
-        /// <returns>A collection of order books.</returns>
         Task<IReadOnlyList<OrderBookSnapshot>> GetAllAsync(CancellationToken cancellationToken = default);
     }
 }

@@ -12,13 +12,11 @@ namespace MatchingEngine.Client.Api
         /// <summary>
         /// Returns all assets balances.
         /// </summary>
-        /// <returns>A collection of assets balances.</returns>
         Task<BalancesGetAllResponse> GetAllAsync(BalancesGetAllRequest request, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns a balance by asset identifier.
         /// </summary>
-        /// <returns>Asset balance.</returns>
         Task<BalancesGetByAssetIdResponse> GetByAssetIdAsync(BalancesGetByAssetIdRequest request, CancellationToken cancellationToken = default);
     }
 }

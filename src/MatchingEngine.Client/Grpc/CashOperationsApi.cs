@@ -21,5 +21,15 @@ namespace MatchingEngine.Client.Grpc
         {
             return await _client.CashInOutAsync(request, cancellationToken: cancellationToken);
         }
+
+        public async Task<Response> CashTransferAsync(CashTransferOperation request, CancellationToken cancellationToken = default)
+        {
+            return await _client.CashTransferAsync(request, cancellationToken: cancellationToken);
+        }
+
+        public async Task<Response> ReservedCashInOutAsync(ReservedCashInOutOperation request, CancellationToken cancellationToken = default)
+        {
+            return await _client.ReservedCashInOutAsync(request, cancellationToken: cancellationToken);
+        }
     }
 }

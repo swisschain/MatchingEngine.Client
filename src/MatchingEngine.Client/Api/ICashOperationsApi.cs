@@ -13,5 +13,15 @@ namespace MatchingEngine.Client.Api
         /// Cash-in an amount.
         /// </summary>
         Task<Response> CashInOutAsync(CashInOutOperation request, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Transfers cash.
+        /// </summary>
+        Task<Response> CashTransferAsync(CashTransferOperation request, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Changes reserved amount for an asset.
+        /// </summary>
+        Task<Response> ReservedCashInOutAsync(ReservedCashInOutOperation request, CancellationToken cancellationToken = default);
     }
 }

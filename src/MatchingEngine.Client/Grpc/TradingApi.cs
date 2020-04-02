@@ -31,5 +31,15 @@ namespace MatchingEngine.Client.Grpc
         {
             return await _client.MarketOrderAsync(request, cancellationToken: cancellationToken);
         }
+
+        public async Task<Response> MassCancelLimitOrderAsync(LimitOrderMassCancel request, CancellationToken cancellationToken = default)
+        {
+            return await _client.MassCancelLimitOrderAsync(request, cancellationToken: cancellationToken);
+        }
+
+        public async Task<MultiLimitOrderResponse> MultiLimitOrderAsync(MultiLimitOrder request, CancellationToken cancellationToken = default)
+        {
+            return await _client.MultiLimitOrderAsync(request, cancellationToken: cancellationToken);
+        }
     }
 }

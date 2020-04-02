@@ -23,5 +23,15 @@ namespace MatchingEngine.Client.Api
         /// Creates new market order.
         /// </summary>
         Task<MarketOrderResponse> CreateMarketOrderAsync(MarketOrder request, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates multiple limit orders.
+        /// </summary>
+        Task<MultiLimitOrderResponse> MultiLimitOrderAsync(MultiLimitOrder request, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Cancels multiple limit orders.
+        /// </summary>
+        Task<Response> MassCancelLimitOrderAsync(LimitOrderMassCancel request, CancellationToken cancellationToken = default);
     }
 }
