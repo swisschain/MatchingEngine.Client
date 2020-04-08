@@ -10,11 +10,13 @@ import "google/protobuf/timestamp.proto";
 
 message BalancesGetAllRequest {
 	string walletId = 1;
+	string brokerId = 2;
 }
 
 message BalancesGetByAssetIdRequest {
 	string walletId = 1;
 	string assetId = 2;
+	string brokerId = 3;
 }
 
 message BalancesGetAllResponse {

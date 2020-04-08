@@ -32,10 +32,10 @@ service TradingService {
 
 service OrderBooksService {
 	rpc OrderBookSnapshots(google.protobuf.Empty) returns (stream com.swisschain.grpc.messages.outgoing.OrderBookSnapshot) {}
+	rpc BrokerOrderBookSnapshots(com.swisschain.grpc.messages.outgoing.OrderBookSnapshotRequest) returns (stream com.swisschain.grpc.messages.outgoing.OrderBookSnapshot) {}
 }
 
 service BalancesService {
 	rpc GetAll(com.swisschain.grpc.balances.BalancesGetAllRequest) returns (com.swisschain.grpc.balances.BalancesGetAllResponse) {}
-
 	rpc GetByAssetId(com.swisschain.grpc.balances.BalancesGetByAssetIdRequest) returns (com.swisschain.grpc.balances.BalancesGetByAssetIdResponse) {}
 }

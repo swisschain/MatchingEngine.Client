@@ -41,5 +41,27 @@ namespace MatchingEngine.Client.Grpc
 
             return orderBooks;
         }
+
+        public async Task<IReadOnlyList<OrderBookSnapshot>> GetAllByBrokerIdAsync(OrderBookSnapshotRequest request, CancellationToken cancellationToken = default)
+        {
+            var orderBooks = new List<OrderBookSnapshot>();
+
+            try
+            {
+                using (var streamingCall = _client.BrokerOrderBookSnapshots(request, cancellationToken: cancellationToken))
+                {
+                    await foreach (var orderBookSnapshot in streamingCall.ResponseStream.ReadAllAsync(cancellationToken))
+                    {
+                        orderBooks.Add(orderBookSnapshot);
+                    }
+                }
+            }
+            catch (RpcException ex) when (ex.StatusCode == StatusCode.Cancelled)
+            {
+                // ignore
+            }
+
+            return orderBooks;
+        }
     }
 }

@@ -14,5 +14,11 @@ namespace MatchingEngine.Client.Api
         /// Returns all order books.
         /// </summary>
         Task<IReadOnlyList<OrderBookSnapshot>> GetAllAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns all order books for a broker.
+        /// </summary>
+        Task<IReadOnlyList<OrderBookSnapshot>> GetAllByBrokerIdAsync(OrderBookSnapshotRequest request,
+            CancellationToken cancellationToken = default);
     }
 }

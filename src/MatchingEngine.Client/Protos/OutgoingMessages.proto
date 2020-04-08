@@ -52,6 +52,7 @@ message BalanceUpdate {
     string newBalance = 4;
     string oldReserved = 5;
     string newReserved = 6;
+    string brokerId = 7;
 }
 
 message Fee {
@@ -100,6 +101,7 @@ message CashInEvent {
         string assetId = 2;
         string volume = 3;
         repeated Fee fees = 4;
+        string brokerId = 5;
     }
     Header header = 1;
     repeated BalanceUpdate balanceUpdates = 2;
@@ -112,6 +114,7 @@ message CashOutEvent {
         string assetId = 2;
         string volume = 3;
         repeated Fee fees = 4;
+        string brokerId = 5;
     }
     Header header = 1;
     repeated BalanceUpdate balanceUpdates = 2;
@@ -126,6 +129,7 @@ message CashTransferEvent {
         string overdraftLimit = 4;
         string assetId = 5;
         repeated Fee fees = 6;
+        string brokerId = 7;
     }
     Header header = 1;
     repeated BalanceUpdate balanceUpdates = 2;
@@ -221,6 +225,7 @@ message ExecutionEvent {
         google.protobuf.Timestamp expiryTime = 24;
         string parentExternalId = 25;
         string childExternalId = 26;
+        string brokerId = 27;
     }
     Header header = 1;
     repeated BalanceUpdate balanceUpdates = 2;
@@ -246,6 +251,7 @@ message ReservedBalanceUpdateEvent {
         string walletId = 1;
         string assetId = 2;
         string volume = 3;
+        string brokerId = 4;
     }
     Header header = 1;
     repeated BalanceUpdate balanceUpdates = 2;
@@ -255,6 +261,10 @@ message ReservedBalanceUpdateEvent {
 message OrderBookSnapshotEvent {
     Header header = 1;
     OrderBookSnapshot orderBook = 2;
+}
+
+message OrderBookSnapshotRequest {
+    string brokerId = 1;
 }
 
 message OrderBookSnapshot {
@@ -270,5 +280,5 @@ message OrderBookSnapshot {
     }
 
     repeated OrderBookLevel levels = 4;
+    string brokerId = 5;
 }
-

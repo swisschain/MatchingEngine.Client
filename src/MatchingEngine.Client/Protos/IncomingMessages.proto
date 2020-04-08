@@ -52,6 +52,7 @@ message CashInOutOperation {
     string volume = 5;
     repeated Fee fees = 6;
     google.protobuf.StringValue messageId = 7;
+    string brokerId = 8;
 }
 
 message CashTransferOperation {
@@ -64,6 +65,7 @@ message CashTransferOperation {
     google.protobuf.StringValue overdraftLimit = 7;
     repeated Fee fees = 8;
     google.protobuf.StringValue messageId = 9;
+    string brokerId = 10;
 }
 
 enum Status {
@@ -125,6 +127,7 @@ message LimitOrder {
     }
     OrderTimeInForce timeInForce = 15;
     google.protobuf.Timestamp expiryTime = 16;
+    string brokerId = 17;
 }
 
 message MarketOrder {
@@ -137,12 +140,14 @@ message MarketOrder {
     google.protobuf.StringValue reservedLimitVolume = 7;
     repeated Fee fees = 8;
     google.protobuf.StringValue messageId = 9;
+    string brokerId = 10;
 }
 
 message LimitOrderCancel {
     string uid = 1;
     repeated string limitOrderId = 2;
     google.protobuf.StringValue messageId = 3;
+    string brokerId = 4;
 }
 
 message MultiLimitOrderCancel {
@@ -152,6 +157,7 @@ message MultiLimitOrderCancel {
     string assetPairId = 4;
     bool isBuy = 5;
     google.protobuf.StringValue messageId = 6;
+    string brokerId = 7;
 }
 
 message LimitOrderMassCancel {
@@ -160,6 +166,7 @@ message LimitOrderMassCancel {
     google.protobuf.StringValue assetPairId = 3;
     google.protobuf.BoolValue isBuy = 4;
     google.protobuf.StringValue messageId = 5;
+    string brokerId = 6;
 }
 
 message MultiLimitOrder {
@@ -194,6 +201,7 @@ message MultiLimitOrder {
     }
     google.protobuf.Int32Value cancelMode = 7;
     google.protobuf.StringValue messageId = 8;
+    string brokerId = 9;
 }
 
 message ReservedCashInOutOperation {
@@ -203,6 +211,7 @@ message ReservedCashInOutOperation {
     string assetId = 4;
     string reservedVolume = 5;
     google.protobuf.StringValue messageId = 6;
+    string brokerId = 7;
 }
 
 enum FeeType {
