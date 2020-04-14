@@ -117,7 +117,7 @@ message LimitOrder {
     google.protobuf.StringValue lowerPrice = 11;
     google.protobuf.StringValue upperLimitPrice = 12;
     google.protobuf.StringValue upperPrice = 13;
-    string messageId = 14;
+    google.protobuf.StringValue messageId = 14;
 
     enum OrderTimeInForce {
         GTC = 0;
@@ -137,7 +137,7 @@ message MarketOrder {
     string assetPairId = 4;
     string volume = 5;
     repeated Fee fees = 6;
-    string messageId = 7;
+    google.protobuf.StringValue messageId = 7;
     string brokerId = 8;
 }
 
